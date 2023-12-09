@@ -1,8 +1,10 @@
 import { FaSearch, FaList } from 'react-icons/fa';
 import logo from '../images/logo-real-estate.png';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <header className="shadow-md bg-white">
       <div className="flex justify-between items-center max-w-6xl mx-auto">
@@ -38,10 +40,18 @@ const Header = () => {
             <li className="hover:underline">About</li>
           </Link>
           <Link
-            to="/sign-in"
+            to="/profile"
             className="hidden md:inline"
           >
-            <li className="hover:underline">Sign in</li>
+            {currentUser ? (
+              <img
+                className="rounded-full h-7 w-7 object-cover"
+                src={currentUser.avatar}
+                alt="profile"
+              />
+            ) : (
+              <li className="hover:underline">Sign in</li>
+            )}
           </Link>
         </ul>
         <FaList className="inline md:hidden text-emerald-500 mr-2" />
