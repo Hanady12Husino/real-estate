@@ -1,4 +1,4 @@
-import { FaSearch, FaList } from 'react-icons/fa';
+import { FaSearch, FaBars } from 'react-icons/fa';
 import logo from '../images/logo-real-estate.png';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -54,7 +54,7 @@ const Header = () => {
             )}
           </Link>
         </ul>
-        <FaList className="inline md:hidden text-emerald-500 mr-2" />
+        <FaBars className="inline md:hidden text-emerald-500 mr-2" />
       </div>
     </header>
   );
