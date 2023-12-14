@@ -156,7 +156,7 @@ const CreateListing = () => {
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7 text-emerald-900">
-        Create a New Listing
+        Create a New Property
       </h1>
       <form
         onSubmit={handleSubmit}
@@ -356,9 +356,9 @@ const CreateListing = () => {
                 <button
                   type="button"
                   onClick={() => handleRemoveImage(index)}
-                  className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75 flex align-items"
+                  className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75 flex items-center"
                 >
-                  <FaTrash className="mr-1 sm" />
+                  <FaTrash className="mr-1 text-xs" />
                   <span>Delete</span>
                 </button>
               </div>
