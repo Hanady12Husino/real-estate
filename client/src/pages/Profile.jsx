@@ -31,7 +31,7 @@ const Profile = () => {
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setShowListingsError] = useState(false);
-  const [userListings, setUserLstings] = useState([]);
+  const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
   //firebase storage
   //allow read;
@@ -134,12 +134,28 @@ const Profile = () => {
         setShowListingsError(true);
         return;
       }
-      setUserLstings(data);
+      setUserListings(data);
     } catch (error) {
       setShowListingsError(true);
     }
   };
-
+  const handleDeleteListing = async (listingId) => {
+    try {
+      const res = await fetch(`/api/listing/delete/${listingId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7 text-emerald-900">
@@ -267,6 +283,7 @@ const Profile = () => {
               <div className="flex flex-col item-center">
                 <button
                   type="button"
+                  onClick={() => handleDeleteListing(listing._id)}
                   className="p-3 text-red-700 rounded-lg uppercase flex items-center hover:opacity-75 "
                 >
                   <FaTrash className="mr-1 text-xs" />
