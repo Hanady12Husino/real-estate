@@ -4,15 +4,16 @@ import {
   ref,
   uploadBytesResumable,
 } from 'firebase/storage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { app } from '../firebase.js';
 import { FaTrash } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const CreateListing = () => {
+const UpdateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const params = useParams();
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
@@ -32,8 +33,20 @@ const CreateListing = () => {
   const [imageUpload, setImageUpload] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const fetchListing = async () => {
+      const listingId = params.listingId;
+      const res = await fetch(`/api/listing/get/${listingId}`);
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+      setFormData(data);
+    };
+    fetchListing();
+  }, []);
 
-  console.log(formData);
   const handleUploadImagesSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 9) {
       setImageUpload(true);
@@ -131,7 +144,7 @@ const CreateListing = () => {
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
-      const res = await fetch('/api/listing/create', {
+      const res = await fetch(`/api/listing/update/${params.listingId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -156,7 +169,7 @@ const CreateListing = () => {
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7 text-emerald-900">
-        Create a New Property
+        Update a Property
       </h1>
       <form
         onSubmit={handleSubmit}
@@ -367,7 +380,7 @@ const CreateListing = () => {
             disabled={loading || imageUpload}
             className="bg-emerald-900 uppercase p-3 rounded-lg text-emerald-100 hover:opacity-95 disabled:opacity-80"
           >
-            {loading ? 'Creating...' : 'Create Property'}
+            {loading ? 'Updating...' : 'Update Property'}
           </button>
 
           {error && <p className="text-red-700 text-sm">{error}</p>}
@@ -377,4 +390,4 @@ const CreateListing = () => {
   );
 };
 
-export default CreateListing;
+export default UpdateListing;

@@ -289,10 +289,12 @@ const Profile = () => {
                   <FaTrash className="mr-1 text-xs" />
                   <span>Delete</span>
                 </button>
-                <button className="p-3 text-green-700 rounded-lg uppercase flex items-center hover:opacity-75">
-                  <FaPen className="mr-1 text-xs" />
-                  Edit
-                </button>
+                <Link to={`/update-listing/${listing._id}`}>
+                  <button className="p-3 text-green-700 rounded-lg uppercase flex items-center hover:opacity-75">
+                    <FaPen className="mr-1 text-xs" />
+                    Edit
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
