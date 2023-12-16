@@ -1,10 +1,28 @@
 import { FaSearch, FaBars } from 'react-icons/fa';
 import logo from '../images/logo-real-estate.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
+
   return (
     <header className="shadow-md bg-white">
       <div className="flex justify-between items-center max-w-6xl mx-auto">
@@ -18,13 +36,20 @@ const Header = () => {
             className=" flex flex-wrap p-2"
           />
         </Link>
-        <form className="rounded-lg p-3 border-solid bg-emerald-500 flex items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="rounded-lg p-3 border-solid bg-emerald-500 flex items-center"
+        >
           <input
             type="text"
             placeholder="Search..."
             className="bg-transparent focus:outline-none w-24 sm:w-60 placeholder-emerald-100"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <FaSearch className="text-emerald-100" />
+          <button>
+            <FaSearch className="text-emerald-100" />
+          </button>
         </form>
         <ul className="flex gap-4 text-emerald-500 mr-5">
           <Link
