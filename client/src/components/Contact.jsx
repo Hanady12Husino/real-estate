@@ -24,14 +24,15 @@ const Contact = ({ listing }) => {
       {landlord && (
         <div className="flex flex-col gap-2">
           <p>
-            Contact
+            Contact{' '}
             <span className="text-emerald-500 font-semibold">
               {landlord.username}
-            </span>
-            for
+            </span>{' '}
+            for{' '}
             <span className="text-emerald-500 font-semibold">
               {listing.name.toLowerCase()}
-            </span>
+            </span>{' '}
+            Property
           </p>
           <textarea
             name="message"
@@ -48,11 +49,6 @@ const Contact = ({ listing }) => {
               to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
               className="bg-emerald-500 text-white p-3 text-center rounded-lg uppercase hover:opacity-95"
             >
-              Send Message
-            </Link>
-          )}
-          {message.length === 0 && (
-            <Link className="bg-emerald-500 text-white p-3 text-center rounded-lg uppercase opacity-80">
               Send Message
             </Link>
           )}
