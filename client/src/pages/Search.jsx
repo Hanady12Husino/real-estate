@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import ListingItem from '../components/ListingItem';
+
 const Search = () => {
   const navigate = useNavigate();
   const [sidebarData, setSidebarData] = useState({
@@ -64,9 +66,11 @@ const Search = () => {
     ) {
       setSidebarData({ ...sidebarData, type: e.target.id });
     }
+
     if (e.target.id === 'searchTerm') {
       setSidebarData({ ...sidebarData, searchTerm: e.target.value });
     }
+
     if (
       e.target.id === 'parking' ||
       e.target.id === 'furnished' ||
@@ -78,9 +82,12 @@ const Search = () => {
           e.target.checked || e.target.checked === 'true' ? true : false,
       });
     }
+
     if (e.target.id === 'sort_order') {
       const sort = e.target.value.split('_')[0] || 'created_at';
+
       const order = e.target.value.split('_')[1] || 'desc';
+
       setSidebarData({ ...sidebarData, sort, order });
     }
   };
@@ -88,6 +95,7 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams();
+    urlParams.set('searchTerm', sidebarData.searchTerm);
     urlParams.set('type', sidebarData.type);
     urlParams.set('parking', sidebarData.parking);
     urlParams.set('furnished', sidebarData.furnished);
@@ -222,10 +230,29 @@ const Search = () => {
           </button>
         </form>
       </div>
-      <div className="p-7">
+      <div className="flex-1 p-3 sm:p-7">
         <h1 className="text-emerald-900 font-semibold text-3xl boerder-b mt-2">
           Property results:
         </h1>
+        <div className="p-3 sm:p-7 flex flex-wrap gap-4">
+          {!loadingListings && listings.length === 0 && (
+            <p className="text-xl text-emerald-900">No listing found!</p>
+          )}
+          {loadingListings && (
+            <p className="text-xl text-emerald-900 text-center w-full">
+              Loading...
+            </p>
+          )}
+
+          {!loadingListings &&
+            listings &&
+            listings.map((listing) => (
+              <ListingItem
+                key={listing._id}
+                listing={listing}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
