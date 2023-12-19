@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaBed, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaBath, FaBed, FaMapMarkerAlt } from 'react-icons/fa';
 const ListingItem = ({ listing }) => {
   return (
     <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[260px]  ">
@@ -30,12 +30,14 @@ const ListingItem = ({ listing }) => {
             {listing.type === 'rent' && '/month'}
           </p>
           <div className="flex gap-4">
-            <div className="font-bold text-xs text-emerald-900">
+            <div className=" flex gap-1 items-center font-bold text-xs text-emerald-900">
+              <FaBed className="text-[16px] " />
               {listing.bedrooms > 1
                 ? `${listing.bedrooms} beds`
                 : `${listing.bedrooms} bed`}
             </div>
-            <div className="font-bold text-xs text-emerald-900">
+            <div className="flex gap-1 items-center font-bold text-xs text-emerald-900">
+              <FaBath className="text-[16px]" />
               {listing.bathrooms > 1
                 ? `${listing.bathrooms} baths`
                 : `${listing.bathrooms} bath`}
