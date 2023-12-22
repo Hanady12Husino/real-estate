@@ -141,7 +141,7 @@ const Listing = () => {
               </button>
             )}
 
-            {contact && <Contact listing={listing} />}
+            {contact && currentUser && <Contact listing={listing} />}
           </div>
         </div>
       )}

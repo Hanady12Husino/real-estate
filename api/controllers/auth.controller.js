@@ -2,11 +2,28 @@ import User from '../models/user.model.js';
 import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../utils/error.js';
 import jwt from 'jsonwebtoken';
+import { nanoid } from 'nanoid';
+
+const generateUsername = async (email) => {
+  let username = email.split('@')[0];
+  let usernameExists = await User.exists({ username: username }).then(
+    (result) => result
+  );
+  usernameExists ? (username += nanoid().substring(0, 3)) : '';
+  return username;
+};
 
 export const signup = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { fullname, email, password } = req.body;
+
   const hashedPassword = bcryptjs.hashSync(password, 10);
-  const newUser = new User({ username, email, password: hashedPassword });
+  let username = await generateUsername(email);
+  const newUser = new User({
+    fullname,
+    username,
+    email,
+    password: hashedPassword,
+  });
   try {
     await newUser.save();
     res.status(201).json('User created successfully!');

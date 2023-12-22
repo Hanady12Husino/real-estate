@@ -10,6 +10,8 @@ import CreateListing from './pages/CreateListing';
 import UpdateListing from './pages/updateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
+import Contact from './pages/Contact';
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -20,6 +22,7 @@ const App = () => {
           path="/"
           element={<Home />}
         />
+
         <Route
           path="/sign-in"
           element={<SignIn />}
@@ -31,6 +34,10 @@ const App = () => {
         <Route
           path="/about"
           element={<About />}
+        />
+        <Route
+          path="/contact-us"
+          element={<Contact />}
         />
         <Route
           path="/search"
