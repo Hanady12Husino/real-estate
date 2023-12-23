@@ -11,8 +11,11 @@ import UpdateListing from './pages/updateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
 import Contact from './pages/Contact';
-
+import PageNotFound from './pages/PageNotFound';
+import Admin from './pages/Admin';
+import { useSelector } from 'react-redux';
 const App = () => {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <BrowserRouter>
       <Header />
@@ -47,7 +50,18 @@ const App = () => {
           path="/listing/:listingId"
           element={<Listing />}
         />
+        <Route
+          path="*"
+          element={<PageNotFound />}
+        />
+
         <Route element={<PrivateRoute />}>
+          {currentUser?.isAdmin === true && (
+            <Route
+              path={'/admin'}
+              element={<Admin />}
+            />
+          )}
           <Route
             path="/profile"
             element={<Profile />}
