@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FaBuilding, FaPen, FaRegBuilding, FaTrash } from 'react-icons/fa';
+import { FaPen, FaTrash } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
+import SideBar from '../components/SideBar';
 
 const Dashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -49,17 +50,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex ">
-      <div className="py-7 px-3 lg:px-7 border-r-2 md:min-h-screen">
-        <Link to="/dashboard">
-          <div className="flex gap-2">
-            <FaBuilding className="text-xl text-emerald-900 hover:scale-125" />
-
-            <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline isActive:underline">
-              My Property
-            </label>
-          </div>
-        </Link>
-      </div>
+      <SideBar />
       <div className="flex-1 p-3 sm:p-7">
         <h1 className="text-emerald-900 font-semibold text-xl lg:text-3xl boerder-b mt-2">
           My Properties:
