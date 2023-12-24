@@ -14,6 +14,10 @@ import Contact from './pages/Contact';
 import PageNotFound from './pages/PageNotFound';
 import Admin from './pages/Admin';
 import { useSelector } from 'react-redux';
+import Footer from './components/Footer';
+import Terms from './pages/Terms';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import Dashboard from './pages/Dashboard';
 const App = () => {
   const { currentUser } = useSelector((state) => state.user);
   return (
@@ -51,6 +55,14 @@ const App = () => {
           element={<Listing />}
         />
         <Route
+          path="/terms"
+          element={<Terms />}
+        />
+        <Route
+          path="/privacy-police"
+          element={<PrivacyPolicy />}
+        />
+        <Route
           path="*"
           element={<PageNotFound />}
         />
@@ -67,6 +79,10 @@ const App = () => {
             element={<Profile />}
           />
           <Route
+            path="/dashboard"
+            element={<Dashboard />}
+          />
+          <Route
             path="/create-listing"
             element={<CreateListing />}
           />
@@ -76,6 +92,7 @@ const App = () => {
           />
         </Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };

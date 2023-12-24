@@ -67,9 +67,9 @@ const Listing = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className="fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer">
+          <div className="fixed top-[34%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer">
             <FaShare
-              className="text-slate-500"
+              className="text-emerald-500"
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
                 setCopied(true);
@@ -80,7 +80,7 @@ const Listing = () => {
             />
           </div>
           {copied && (
-            <p className="fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2">
+            <p className="fixed top-[23%] right-[5%] z-10 rounded-md bg-emerald-100 p-2">
               Link copied!
             </p>
           )}
