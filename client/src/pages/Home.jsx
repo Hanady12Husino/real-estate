@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
 import { FaArrowRight } from 'react-icons/fa';
-
+import BackgroundImage from '../images/background.png';
 const Home = () => {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
@@ -44,30 +44,39 @@ const Home = () => {
 
   return (
     <>
-      <div className="flex ">
-        <div className="flex flex-1 flex-col gap-6 py-28 px-10 max-w-6xl mx-auto ">
-          <div>
-            <h1 className="text-emerald-500 font-bold text-3xl lg:text-6xl">
-              Find your next{' '}
-              <span className="gradient-text">
-                perfect <br /> property with ease
-              </span>
-            </h1>
-          </div>
-          <div className="text-sm sm:text-lg text-gray-400">
-            Home Real Estate Agency is the best place to find your perfect place
-            to live.
-          </div>
+      <div className="bg-gradient-to-b from-emerald-50 to-emerald-100 w-full  h-[80vh] relative">
+        <img
+          src={BackgroundImage}
+          className="w-full h-full object-cover absolute mix-blend-overlay opacity-90"
+        />
+        <div
+          style={{ zIndex: 1 }}
+          className=" flex  absolute items-center justify-center h-full w-full md:text-center "
+        >
+          <div className="flex  flex-col gap-6 py-28 px-10 max-w-6xl mx-auto md:items-center">
+            <div>
+              <h1 className="text-emerald-500 font-bold text-3xl lg:text-6xl leading-relaxed	">
+                Find your next{' '}
+                <span className="gradient-text">
+                  perfect <br /> property with ease
+                </span>
+              </h1>
+            </div>
+            <div className="text-sm sm:text-lg text-emerald-700 w-[250px] sm:w-[490px]">
+              Home Real Estate Agency is the best place to find your perfect
+              place to live.
+            </div>
 
-          <Link
-            className="text-md text-emerald-500 hover:underline flex items-center gap-1 whitespace-nowrap"
-            to={'/search'}
-          >
-            Search now <FaArrowRight />
-          </Link>
+            <Link
+              className="text-md text-emerald-500 hover:underline flex items-center gap-1 whitespace-nowrap"
+              to={'/search'}
+            >
+              Search now <FaArrowRight />
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-1"></div>
       </div>
+
       <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
         {offerListings && offerListings.length > 0 && (
           <div className="mt-4 sm:mt-10">
