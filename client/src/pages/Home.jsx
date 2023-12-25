@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
 import { FaArrowRight } from 'react-icons/fa';
 import BackgroundImage from '../images/background.png';
+
 const Home = () => {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
@@ -149,6 +150,7 @@ const Home = () => {
           </div>
         )}
       </div>
+      
     </>
   );
 };

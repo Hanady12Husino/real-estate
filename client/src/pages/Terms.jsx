@@ -1,5 +1,11 @@
+
+
 const Terms = () => {
-  return <div>Terms & condition</div>;
+  return (
+    <div>
+      
+    </div>
+  );
 };
 
 export default Terms;

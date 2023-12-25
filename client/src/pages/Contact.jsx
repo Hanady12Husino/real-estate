@@ -1,5 +1,6 @@
 import emailjs from '@emailjs/browser';
 import { useRef, useState } from 'react';
+
 const Contact = () => {
   const formRef = useRef();
   const [form, setForm] = useState({
@@ -59,7 +60,7 @@ const Contact = () => {
       );
   };
   return (
-    <div className="p-3 max-w-lg mx-auto">
+    <div className="px-3 py-20 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7 text-emerald-900">
         {' '}
         <p className="text-sm uppercase font-normal text-center text-emerald-500">

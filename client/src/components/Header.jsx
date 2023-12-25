@@ -1,10 +1,16 @@
-import { FaSearch, FaBars, FaTimes } from 'react-icons/fa';
+import {
+  FaSearch,
+  FaBars,
+  FaTimes,
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+} from 'react-icons/fa';
 import logo from '../images/logo-real-estate.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { FaRegEnvelope, FaPhone } from 'react-icons/fa';
-import { GoLocation } from 'react-icons/go';
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -29,22 +35,42 @@ const Header = () => {
     setToggle((prev) => !prev);
   };
   return (
-    <header className="shadow-md bg-white">
+    <header className="shadow-md ">
       <div className="lg:block hidden bg-emerald-900 text-emerald-100 py-2">
         <div className="container mx-auto lg:flex hidden items-center justify-between px-3">
-          <span className="flex items-center gap-x-1">
-            <GoLocation />
-            <p className="text-sm">The first street</p>
-          </span>
+          <div className="flex gap-2 text-emerald-100">
+            <p>Follow us:</p>
+            <ul className="flex gap-2 items-center text-center">
+              <Link to="#">
+                <li className="text-lg text-emerald-100 opacity-95 hover:scale-125 hover:rotate-12">
+                  <FaFacebook />
+                </li>
+              </Link>
+              <Link to="#">
+                <li className="text-lg text-emerald-100 opacity-95 hover:scale-125 hover:rotate-12">
+                  <FaInstagram />
+                </li>
+              </Link>
+              <Link to="#">
+                <li className="text-lg text-emerald-100 opacity-95 hover:scale-125 hover:rotate-12">
+                  <FaTwitter />
+                </li>
+              </Link>
+            </ul>
+          </div>
           <div className="flex items-center gap-x-4">
-            <span className="flex items-center gap-x-1">
-              <FaPhone />
-              <p className="text-sm">+1 34-343-232</p>
-            </span>
-            <span className="flex items-center gap-x-1">
-              <FaRegEnvelope />
-              <p className="text-sm">info@hanadyhusino.com</p>
-            </span>
+            <Link to="#">
+              <span className="flex items-center gap-x-1">
+                <FaPhone />
+                <p className="text-sm">+1 34-343-232</p>
+              </span>
+            </Link>
+            <Link to="#">
+              <span className="flex items-center gap-x-1">
+                <FaRegEnvelope />
+                <p className="text-sm">info@realestateagency.com</p>
+              </span>
+            </Link>
           </div>
         </div>
       </div>
