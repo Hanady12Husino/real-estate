@@ -126,7 +126,7 @@ const Header = () => {
                 Contact
               </li>
             </Link>
-            <Link to="/profile">
+            <Link to="/profile/:id">
               {currentUser ? (
                 <img
                   className="rounded-full h-7 w-7 object-cover"

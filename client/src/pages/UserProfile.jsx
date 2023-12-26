@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
   const { currentUser } = useSelector((state) => state.user);
+
   return (
     <div className="flex">
       <SideBar />
+
       <div className="flex-1 p-3 sm:p-7">
         <h1 className="text-emerald-900 font-semibold text-xl lg:text-3xl boerder-b mt-2">
           Profile

@@ -47,7 +47,7 @@ const Listing = () => {
     fetchListing();
   }, [params.listingId]);
   return (
-    <main>
+    <main className="min-h-screen">
       {loading && <p className="text-center mt-7 text-2xl">Loading...</p>}
       {error && (
         <p className="text-center mt-7 text-2xl">Something went wrong!</p>
@@ -132,25 +132,29 @@ const Listing = () => {
                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
               </li>
             </ul>
-            {currentUser && listing.userRef !== currentUser._id && !contact && (
-              <button
-                onClick={() => setContact(true)}
-                className="bg-emerald-900 uppercase p-3 rounded-lg text-emerald-100 hover:opacity-95 "
-              >
-                Email Agent
-              </button>
-            )}
-            {currentUser && listing.userRef === currentUser._id && !contact && (
-              <Link
-                to={`/update-listing/${listing._id}`}
-                className="bg-emerald-900 uppercase p-3 rounded-lg text-emerald-100 hover:opacity-95 "
-              >
-                <button className="bg-emerald-900 uppercase text-center rounded-lg text-emerald-100 hover:opacity-95 ">
-                  Update Property
+            <div className="flex gap-4">
+              {!contact && (
+                <button
+                  onClick={() => setContact(true)}
+                  className="bg-emerald-900 w-1/2 flex-1 uppercase p-3 rounded-lg text-emerald-100 hover:opacity-95 "
+                >
+                  Email Agent
                 </button>
-              </Link>
-            )}
-            {contact && currentUser && <Contact listing={listing} />}
+              )}
+              {currentUser &&
+                listing.userRef === currentUser._id &&
+                !contact && (
+                  <Link
+                    to={`/update-listing/${listing._id}`}
+                    className="bg-emerald-900 uppercase flex-1 p-3 w-1/2 rounded-lg text-emerald-100 hover:opacity-95 text-center"
+                  >
+                    <button className="bg-emerald-900  uppercase text-center rounded-lg text-emerald-100 hover:opacity-95 ">
+                      Update Property
+                    </button>
+                  </Link>
+                )}
+              {contact && <Contact listing={listing} />}
+            </div>
           </div>
         </div>
       )}

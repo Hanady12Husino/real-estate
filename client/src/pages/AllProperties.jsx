@@ -1,29 +1,29 @@
 import { useEffect, useState } from 'react';
 
 import SideBar from '../components/SideBar';
+import { Link } from 'react-router-dom';
 
-const Agents = () => {
-  const [users, setUsers] = useState([]);
+const AllProperties = () => {
+  const [listings, setListings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const userPerPage = 5;
   const lastIndex = currentPage * userPerPage;
   const firstIndex = lastIndex - userPerPage;
-  const agents = users.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(users.length / userPerPage);
+  const properties = listings.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(listings.length / userPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchListings = async () => {
       try {
-        const res = await fetch('/api/user/get/:id');
+        const res = await fetch('/api/listing/get?type=all');
         const data = await res.json();
-        setUsers(data);
+        setListings(data);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchUsers();
+    fetchListings();
   }, []);
-
   const prevPage = (e) => {
     e.preventDefault();
     if (currentPage !== 1) {
@@ -44,9 +44,10 @@ const Agents = () => {
       <SideBar />
       <div className="flex-1 p-3 sm:p-7">
         <h1 className="text-emerald-900 font-semibold text-xl lg:text-3xl boerder-b mt-2">
-          All agents
+          All properties
         </h1>
-        {users && users.length > 0 && (
+
+        {listings && listings.length > 0 && (
           <div className="flex flex-col gap-4 mt-[20px]">
             <table className="table-auto ">
               <thead className="bg-emerald-50 border-b px-10 text-left sr-only sm:not-sr-only">
@@ -59,34 +60,27 @@ const Agents = () => {
                 <th className="text-lg font-semibold text-emerald-900 py-4 px-4">
                   Name
                 </th>
-                <th className="text-lg font-semibold text-emerald-900 py-4 px-4">
-                  Email
-                </th>
               </thead>
               <tbody>
-                {agents.map((user) => (
+                {properties.map((listing) => (
                   <tr
-                    key={user._id}
-                    className="border-b flex flex-col mb-4 sm:table-row"
+                    key={listing._id}
+                    className="border-b sm:table-row"
                   >
-                    <td
-                      className=" text-sm  text-emerald-500   @apply px-4 py-3   first:rounded-tl-lg first:rounded-bl-lg last:rounded-tr-lg last:rounded-br-lg
-"
-                    >
-                      {user._id}
+                    <td className="p-4 text-sm  text-emerald-500">
+                      {listing._id}
                     </td>
                     <td className="p-4 text-sm  text-emerald-500">
-                      <img
-                        src={user.avatar}
-                        alt="listing cover"
-                        className="h-10 w-10 object-cover rounded-full"
-                      />
+                      <Link to={`/listing/${listing._id}`}>
+                        <img
+                          src={listing.imageUrls[0]}
+                          alt="listing cover"
+                          className="h-10 w-10 object-cover rounded-full"
+                        />
+                      </Link>
                     </td>
                     <td className="p-4 text-sm  text-emerald-500">
-                      {user.fullname}
-                    </td>
-                    <td className="p-4 text-sm  text-emerald-500">
-                      {user.email}
+                      {listing.name}
                     </td>
                   </tr>
                 ))}
@@ -105,7 +99,7 @@ const Agents = () => {
                 </li>
                 {numbers.map((n, i) => (
                   <li
-                    className={`hidden sm:inline ${
+                    className={`hidden sm:inline  ${
                       currentPage === n ? 'active' : ''
                     }`}
                     key={i}
@@ -140,4 +134,4 @@ const Agents = () => {
   );
 };
 
-export default Agents;
+export default AllProperties;

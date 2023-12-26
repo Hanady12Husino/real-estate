@@ -22,6 +22,7 @@ import Dashboard from './pages/Dashboard';
 import Agents from './pages/Agents';
 import UserProfile from './pages/UserProfile';
 import UpdateProfile from './pages/UpdateProfile';
+import AllProperties from './pages/AllProperties';
 const App = () => {
   const { currentUser } = useSelector((state) => state.user);
   return (
@@ -70,10 +71,7 @@ const App = () => {
           path="*"
           element={<PageNotFound />}
         />
-        <Route
-          path={'/users'}
-          element={<Agents />}
-        />
+
         <Route element={<PrivateRoute />}>
           {currentUser?.isAdmin === true && (
             <Route
@@ -81,18 +79,29 @@ const App = () => {
               element={<Dashboard />}
             />
           )}
-          {currentUser && currentUser?.isAdmin === true && (
+          {currentUser?.isAdmin === true && (
             <Route
-              path={'/profile/:id'}
-              element={<UserProfile />}
+              path={'/properties'}
+              element={<AllProperties />}
             />
           )}
+          {currentUser?.isAdmin === true && (
+            <Route
+              path={'/users'}
+              element={<Agents />}
+            />
+          )}
+          <Route
+            path={'/profile/:id'}
+            element={<UserProfile />}
+          />
+
           <Route
             path="/update-profile"
             element={<UpdateProfile />}
           />
           <Route
-            path="/properties"
+            path="/my-properties"
             element={<Properties />}
           />
           <Route
