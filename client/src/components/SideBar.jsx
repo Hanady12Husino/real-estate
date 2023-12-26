@@ -24,8 +24,8 @@ const SideBar = () => {
     }
   };
   return (
-    <div className="py-7 px-3 lg:px-7 border-r-2 min-h-screen flex flex-col gap-4">
-      <Link to="/dashboard">
+    <div className="py-7 px-3 lg:px-7 border-r-2 min-h-screen flex flex-col gap-4 ">
+      <Link to="/properties">
         <div className="flex gap-2">
           <FaBuilding className="text-xl text-emerald-900 hover:scale-125" />
 

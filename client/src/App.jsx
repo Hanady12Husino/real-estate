@@ -17,7 +17,9 @@ import { useSelector } from 'react-redux';
 import Footer from './components/Footer';
 import Terms from './pages/Terms';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Properties from './pages/Properties';
 import Dashboard from './pages/Dashboard';
+import Agents from './pages/Agents';
 const App = () => {
   const { currentUser } = useSelector((state) => state.user);
   return (
@@ -66,21 +68,30 @@ const App = () => {
           path="*"
           element={<PageNotFound />}
         />
-
+        <Route
+          path={'/users'}
+          element={<Agents />}
+        />
         <Route element={<PrivateRoute />}>
           {currentUser?.isAdmin === true && (
-            <Route
-              path={'/admin'}
-              element={<Admin />}
-            />
-          )}
+              <Route
+                path={'/admin'}
+                element={<Admin />}
+              />
+            ) && (
+              <Route
+                path={'/dashboard'}
+                element={<Dashboard />}
+              />
+            )}
+
           <Route
             path="/profile"
             element={<Profile />}
           />
           <Route
-            path="/dashboard"
-            element={<Dashboard />}
+            path="/properties"
+            element={<Properties />}
           />
           <Route
             path="/create-listing"

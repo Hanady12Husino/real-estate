@@ -1,120 +1,194 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
-import { FaPen, FaTrash } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import SideBar from '../components/SideBar';
-
+import SideBar from '../components/SideBar.jsx';
+import { useEffect, useState } from 'react';
+import { FaHome, FaUsers } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 const Dashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
-  const [showListingsError, setShowListingsError] = useState(false);
-  const [userListings, setUserListings] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [listings, setListings] = useState([]);
+  const [offerListings, setOfferListings] = useState([]);
+  const [saleListings, setSaleListings] = useState([]);
+  const [rentListings, setRentListings] = useState([]);
 
   useEffect(() => {
-    const fetchUserListings = async () => {
+    const fetchListings = async () => {
       try {
-        setShowListingsError(false);
-        const res = await fetch(`/api/user/listings/${currentUser._id}`);
+        const res = await fetch('/api/listing/get?type=all');
         const data = await res.json();
-
-        if (data.success === false) {
-          setShowListingsError(true);
-          return;
-        }
-        setUserListings(data);
-        //if (userListings.length = 0)
+        setListings(data);
+        fetchOfferListings();
       } catch (error) {
-        setShowListingsError(true);
+        console.log(error);
       }
     };
-    fetchUserListings();
+    const fetchOfferListings = async () => {
+      try {
+        const res = await fetch('/api/listing/get?offer=true');
+        const data = await res.json();
+        setOfferListings(data);
+        fetchRentListings();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchRentListings = async () => {
+      try {
+        const res = await fetch('/api/listing/get?type=rent');
+        const data = await res.json();
+        setRentListings(data);
+        fetchSaleListings();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchSaleListings = async () => {
+      try {
+        const res = await fetch('/api/listing/get?type=sale');
+        const data = await res.json();
+        setSaleListings(data);
+        fetchUsers();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchUsers = async () => {
+      try {
+        const res = await fetch('/api/user/get/:id');
+        const data = await res.json();
+        setUsers(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchListings();
   }, []);
 
-  const handleDeleteListing = async (listingId) => {
-    try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
-        method: 'DELETE',
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        console.log(data.message);
-        return;
-      }
-      setUserListings((prev) =>
-        prev.filter((listing) => listing._id !== listingId)
-      );
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
   return (
-    <div className="flex ">
+    <div className="flex">
       <SideBar />
       <div className="flex-1 p-3 sm:p-7">
         <h1 className="text-emerald-900 font-semibold text-xl lg:text-3xl boerder-b mt-2">
-          My Properties:
+          Dashboard
         </h1>
-        <p className="text-red-700 t-5">
-          {showListingsError ? 'Error Show Properties' : ''}
-        </p>
-        <div className="py-6 px-3">
-          {userListings.length === 0 && (
-            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-20 items-center">
-              <p className="text-xl text-emerald-900">
-                Dont have any properties yet!
-              </p>
-              <Link to={'/create-listing'}>
-                <button className="bg-emerald-500 text-emerald-100 duration-500 px-6 py-2 hover:bg-emerald-900 rounded-full ">
-                  Add Property
-                </button>
-              </Link>
-            </div>
-          )}
-
-          {userListings && userListings.length > 0 && (
-            <div className="flex flex-col gap-4">
-              {userListings.map((listing) => (
-                <div
-                  key={listing._id}
-                  className="border rounded-lg p-3 flex lg:w-2/3 justify-between items-center "
-                >
-                  <div className="flex flex-col sm:flex-row gap-4 md:items-center">
-                    <Link to={`/listing/${listing._id}`}>
-                      <img
-                        src={listing.imageUrls[0]}
-                        alt="listing cover"
-                        className="h-18 w-20 sm:h-20 sm:w-20 object-cover rounded-lg"
-                      />
-                    </Link>
-                    <Link
-                      className="text-emerald-900 font-semibold text-[14px] md:text-[16px] hover:underline  flex-1"
-                      to={`/listing/${listing._id}`}
+        <h2 className="text-[14px] text-emerald-500 py-3">
+          Welcome Back {currentUser.fullname}
+        </h2>
+        <div className="flex mt-[20px] gap-4 flex-col lg:flex-row">
+          <div className="flex flex-col rounded-lg bg-emerald-900 py-[50px]  items-center gap-3 w-full lg:w-1/2">
+            <FaHome className="text-emerald-100 text-3xl" />
+            <h3 className="text-sm text-emerald-50 w-200">All Properties</h3>
+            <h3 className="text-2xl text-emerald-500 font-bold ">
+              {listings.length}
+            </h3>
+          </div>
+          <div className="flex flex-col rounded-lg bg-emerald-900 py-[50px]  items-center gap-3 w-full lg:w-1/2">
+            <FaUsers className="text-emerald-100 text-3xl" />
+            <h3 className="text-sm text-emerald-50 w-200">All Agents</h3>
+            <h3 className="text-2xl text-emerald-500 font-bold ">
+              {users.length}
+            </h3>
+          </div>
+        </div>
+        <div className="mt-[20px] flex flex-col lg:flex-row gap-4">
+          <div className="flex flex-col rounded-lg bg-gradient-to-r from-emerald-200 to-emerald-50  items-center gap-4 w-full lg:w-1/3 py-[50px]">
+            <h3 className="text-sm text-emerald-900 ">Properties For Sales</h3>
+            <h3 className="text-xl text-emerald-500 font-bold ">
+              {saleListings.length}
+            </h3>
+          </div>
+          <div className="flex flex-col rounded-lg bg-gradient-to-r from-emerald-200 to-emerald-50  items-center gap-4 w-full lg:w-1/3 py-[50px]">
+            <h3 className="text-sm text-emerald-900 ">Properties For Rent</h3>
+            <h3 className="text-xl text-emerald-500 font-bold">
+              {rentListings.length}
+            </h3>
+          </div>
+          <div className=" flex flex-col rounded-lg bg-gradient-to-r from-emerald-200 to-emerald-50  items-center gap-4 w-full lg:w-1/3 py-[50px]">
+            <h3 className="text-sm w-200 text-emerald-900">
+              Properties With Offers
+            </h3>
+            <h3 className="text-xl text-emerald-500 font-bold">
+              {offerListings.length}
+            </h3>
+          </div>
+        </div>
+        <div className="flex mt-[20px] gap-4 flex-col lg:flex-row">
+          <div className="flex  gap-4 flex-col  border rounded-lg p-3 w-full lg:w-1/3">
+            <h2 className="text-center text-3xl text-emerald-900 font-bold">
+              Top Agents
+            </h2>
+            {users && users.length > 0 && (
+              <div className="flex flex-col gap-4">
+                {users
+                  .map((user) => (
+                    <div
+                      key={user._id}
+                      className=" flex justify-between items-center "
                     >
-                      <p>{listing.name}</p>
-                    </Link>
-                  </div>
+                      <div className="flex gap-4 items-center">
+                        <Link to="/profile">
+                          <img
+                            src={user.avatar}
+                            alt="listing cover"
+                            className="h-10 w-10 object-cover rounded-full"
+                          />
+                        </Link>
 
-                  <div className="flex flex-col item-center">
-                    <button
-                      type="button"
-                      onClick={() => handleDeleteListing(listing._id)}
-                      className="p-3 text-red-700 rounded-lg uppercase flex items-center hover:opacity-75 "
+                        <Link
+                          className=" hover:underline  flex-1"
+                          to="/profile/"
+                        >
+                          <p className="text-emerald-900 font-semibold text-[14px] md:text-[16px]">
+                            {user.fullname}
+                          </p>
+                          <p className="text-emerald-500  text-[14px] md:text-[12px]">
+                            {user.email}
+                          </p>
+                        </Link>
+                      </div>
+                    </div>
+                  ))
+                  .slice(24, 28)}
+              </div>
+            )}
+          </div>
+          <div className="flex  gap-4 flex-col  border rounded-lg p-3 w-full lg:w-2/3">
+            <h2 className="text-center text-3xl text-emerald-900 font-bold">
+              Latest Properties
+            </h2>
+
+            {listings && listings.length > 0 && (
+              <div className="flex flex-col gap-4">
+                {listings
+                  .map((listing) => (
+                    <div
+                      key={listing._id}
+                      className=" flex justify-between items-center "
                     >
-                      <FaTrash className="mr-1 text-xs" />
-                      <span>Delete</span>
-                    </button>
-                    <Link to={`/update-listing/${listing._id}`}>
-                      <button className="p-3 text-green-700 rounded-lg uppercase flex items-center hover:opacity-75">
-                        <FaPen className="mr-1 text-xs" />
-                        Edit
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+                      <div className="flex gap-4 items-center">
+                        <Link to={`/listing/${listing._id}`}>
+                          <img
+                            src={listing.imageUrls[0]}
+                            alt="listing cover"
+                            className="h-10 w-10 object-cover rounded-full"
+                          />
+                        </Link>
+
+                        <Link
+                          className=" hover:underline  flex-1"
+                          to={`/listing/${listing._id}`}
+                        >
+                          <p className="text-emerald-900 font-semibold text-[14px] md:text-[16px]">
+                            {listing.name}
+                          </p>
+                        </Link>
+                      </div>
+                    </div>
+                  ))
+                  .slice(-4)}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

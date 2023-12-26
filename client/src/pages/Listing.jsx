@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
@@ -140,7 +140,16 @@ const Listing = () => {
                 Email Agent
               </button>
             )}
-
+            {currentUser && listing.userRef === currentUser._id && !contact && (
+              <Link
+                to={`/update-listing/${listing._id}`}
+                className="bg-emerald-900 uppercase p-3 rounded-lg text-emerald-100 hover:opacity-95 "
+              >
+                <button className="bg-emerald-900 uppercase text-center rounded-lg text-emerald-100 hover:opacity-95 ">
+                  Update Property
+                </button>
+              </Link>
+            )}
             {contact && currentUser && <Contact listing={listing} />}
           </div>
         </div>

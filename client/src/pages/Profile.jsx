@@ -160,7 +160,7 @@ const Profile = () => {
   return (
     <div className="flex">
       <SideBar />
-      <div className="p-3 max-w-lg mx-auto flex-1 p-3 sm:p-7">
+      <div className="p-3 max-w-lg mx-auto flex-1 sm:p-7">
         <h1 className="text-3xl text-center font-semibold my-7 text-emerald-900">
           {' '}
           Profile
@@ -197,6 +197,14 @@ const Profile = () => {
               ''
             )}
           </p>
+          <input
+            type="text"
+            placeholder="username"
+            defaultValue={currentUser.fullname}
+            id="username"
+            className="border p-3 rounded-lg"
+            onChange={handleChange}
+          />
           <input
             type="text"
             placeholder="username"
