@@ -126,7 +126,7 @@ const Dashboard = () => {
                       className=" flex justify-between items-center "
                     >
                       <div className="flex gap-4 items-center">
-                        <Link to="/profile">
+                        <Link to={`/profile/${currentUser._id}`}>
                           <img
                             src={user.avatar}
                             alt="listing cover"
@@ -136,7 +136,7 @@ const Dashboard = () => {
 
                         <Link
                           className=" hover:underline  flex-1"
-                          to="/profile/"
+                          to={`/profile/${currentUser._id}`}
                         >
                           <p className="text-emerald-900 font-semibold text-[14px] md:text-[16px]">
                             {user.fullname}

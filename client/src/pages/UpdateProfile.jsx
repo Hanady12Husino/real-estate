@@ -23,7 +23,7 @@ import { Link } from 'react-router-dom';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import SideBar from '../components/SideBar.jsx';
 
-const Profile = () => {
+const UpdateProfile = () => {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
@@ -318,4 +318,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UpdateProfile;

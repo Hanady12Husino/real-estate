@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import Profile from './pages/Profile';
+//import Profile from './pages/UpdateProfile';
 import About from './pages/About';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
@@ -12,7 +12,7 @@ import Listing from './pages/Listing';
 import Search from './pages/Search';
 import Contact from './pages/Contact';
 import PageNotFound from './pages/PageNotFound';
-import Admin from './pages/Admin';
+
 import { useSelector } from 'react-redux';
 import Footer from './components/Footer';
 import Terms from './pages/Terms';
@@ -20,6 +20,8 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Properties from './pages/Properties';
 import Dashboard from './pages/Dashboard';
 import Agents from './pages/Agents';
+import UserProfile from './pages/UserProfile';
+import UpdateProfile from './pages/UpdateProfile';
 const App = () => {
   const { currentUser } = useSelector((state) => state.user);
   return (
@@ -74,20 +76,20 @@ const App = () => {
         />
         <Route element={<PrivateRoute />}>
           {currentUser?.isAdmin === true && (
-              <Route
-                path={'/admin'}
-                element={<Admin />}
-              />
-            ) && (
-              <Route
-                path={'/dashboard'}
-                element={<Dashboard />}
-              />
-            )}
-
+            <Route
+              path={'/dashboard'}
+              element={<Dashboard />}
+            />
+          )}
+          {currentUser && currentUser?.isAdmin === true && (
+            <Route
+              path={'/profile/:id'}
+              element={<UserProfile />}
+            />
+          )}
           <Route
-            path="/profile"
-            element={<Profile />}
+            path="/update-profile"
+            element={<UpdateProfile />}
           />
           <Route
             path="/properties"
