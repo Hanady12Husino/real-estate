@@ -33,76 +33,78 @@ const SideBar = () => {
     }
   };
   return (
-    <div className="py-7 px-3 lg:px-7 border-r-2 min-h-screen flex flex-col gap-4 ">
-      {currentUser?.isAdmin === true && (
-        <Link to="/dashboard">
+    <div className="py-7 px-3 lg:px-7 border-r-2 min-h-screen w-14 lg:w-[170px]">
+      <div className="fixed flex flex-col gap-4">
+        {currentUser?.isAdmin === true && (
+          <Link to="/dashboard">
+            <div className="flex gap-2">
+              <FaThLarge className="text-xl text-emerald-900 hover:scale-125" />
+
+              <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
+                Dashboard
+              </label>
+            </div>
+          </Link>
+        )}
+        <Link to="/profile/:id">
           <div className="flex gap-2">
-            <FaThLarge className="text-xl text-emerald-900 hover:scale-125" />
+            <FaUser className="text-xl text-emerald-900 hover:scale-125" />
 
             <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
-              Dashboard
+              Profile
             </label>
           </div>
         </Link>
-      )}
-      <Link to="/profile/:id">
-        <div className="flex gap-2">
-          <FaUser className="text-xl text-emerald-900 hover:scale-125" />
-
-          <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
-            Profile
-          </label>
-        </div>
-      </Link>
-      <Link to="/my-properties">
-        <div className="flex gap-2">
-          <FaBuilding className="text-xl text-emerald-900 hover:scale-125" />
-
-          <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
-            My Property
-          </label>
-        </div>
-      </Link>
-      {currentUser?.isAdmin === true && (
-        <Link to="/users">
-          <div className="flex gap-2">
-            <FaUsers className="text-xl text-emerald-900 hover:scale-125" />
-
-            <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
-              Agents
-            </label>
-          </div>
-        </Link>
-      )}{' '}
-      {currentUser?.isAdmin === true && (
-        <Link to="/properties">
+        <Link to="/my-properties">
           <div className="flex gap-2">
             <FaBuilding className="text-xl text-emerald-900 hover:scale-125" />
 
             <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
-              Properties
+              My Property
             </label>
           </div>
         </Link>
-      )}
-      <Link to="/update-profile">
-        <div className="flex gap-2">
-          <FaCog className="text-xl text-emerald-900 hover:scale-125" />
+        {currentUser?.isAdmin === true && (
+          <Link to="/users">
+            <div className="flex gap-2">
+              <FaUsers className="text-xl text-emerald-900 hover:scale-125" />
+
+              <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
+                Agents
+              </label>
+            </div>
+          </Link>
+        )}{' '}
+        {currentUser?.isAdmin === true && (
+          <Link to="/properties">
+            <div className="flex gap-2">
+              <FaBuilding className="text-xl text-emerald-900 hover:scale-125" />
+
+              <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
+                Properties
+              </label>
+            </div>
+          </Link>
+        )}
+        <Link to="/update-profile">
+          <div className="flex gap-2">
+            <FaCog className="text-xl text-emerald-900 hover:scale-125" />
+
+            <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
+              Settings
+            </label>
+          </div>
+        </Link>
+        <div
+          onClick={handleSignOut}
+          className="flex gap-2"
+        >
+          <FaSignOutAlt className="text-xl text-emerald-900 hover:scale-125" />
 
           <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
-            Settings
+            Log Out
           </label>
         </div>
-      </Link>
-      <div
-        onClick={handleSignOut}
-        className="flex gap-2"
-      >
-        <FaSignOutAlt className="text-xl text-emerald-900 hover:scale-125" />
-
-        <label className="whitespace-nowrap hidden lg:inline font-semibold text-emerald-900 hover:underline cursor-pointer">
-          Log Out
-        </label>
       </div>
     </div>
   );
