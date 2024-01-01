@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
 import { FaArrowRight } from 'react-icons/fa';
 import BackgroundImage from '../images/background.png';
+import AnimationWrapper from '../components/AnimationWrapper';
 
 const Home = () => {
   const [offerListings, setOfferListings] = useState([]);
@@ -44,7 +45,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <AnimationWrapper>
       <div className="bg-gradient-to-b from-emerald-50 to-emerald-100 w-full  h-[80vh] relative">
         <img
           src={BackgroundImage}
@@ -150,8 +151,7 @@ const Home = () => {
           </div>
         )}
       </div>
-      
-    </>
+    </AnimationWrapper>
   );
 };
 

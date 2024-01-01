@@ -1,7 +1,9 @@
+import AnimationWrapper from '../components/AnimationWrapper';
+
 const About = () => {
   return (
-    <div>
-      <div className="py-20 px-4 max-w-6xl mx-auto">
+    <AnimationWrapper>
+      <div className="py-20 px-4 max-w-6xl mx-auto min-h-screen">
         <h1 className="text-3xl font-bold mb-4 text-emerald-900">
           About Home Real Estate Agency
         </h1>
@@ -28,7 +30,7 @@ const About = () => {
           clients.
         </p>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 };
 

@@ -7,6 +7,7 @@ import {
   signInFailure,
 } from '../redux/user/userSlice';
 import OAuth from '../components/OAuth';
+import AnimationWrapper from '../components/AnimationWrapper';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -43,50 +44,52 @@ const SignIn = () => {
     }
   };
   return (
-    <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7 text-emerald-900">
-        {' '}
-        Sign In
-      </h1>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-4"
-      >
-        <input
-          type="email"
-          placeholder="email"
-          className="border p-3 rounded-lg"
-          id="email"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          className="border p-3 rounded-lg"
-          id="password"
-          onChange={handleChange}
-        />
-        <button
-          disabled={loading}
-          className="bg-emerald-500 uppercase p-3 rounded-full text-emerald-100 hover:opacity-95 disabled:opacity-80"
+    <AnimationWrapper>
+      <div className="p-3 max-w-lg mx-auto min-h-screen">
+        <h1 className="text-3xl text-center font-semibold my-7 text-emerald-900">
+          {' '}
+          Sign In
+        </h1>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-4"
         >
-          {loading ? 'Loading...' : 'Sing In'}
-        </button>
-        <div className="relative w-full flex items-center gap-2 my-5 opacity-50 uppercase text-emerald-500 font-bold">
-          <hr className="w-1/2 border-emerald-500" />
-          <p>or</p>
-          <hr className="w-1/2 border-emerald-500" />
+          <input
+            type="email"
+            placeholder="email"
+            className="border p-3 rounded-lg"
+            id="email"
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            className="border p-3 rounded-lg"
+            id="password"
+            onChange={handleChange}
+          />
+          <button
+            disabled={loading}
+            className="bg-emerald-500 uppercase p-3 rounded-full text-emerald-100 hover:opacity-95 disabled:opacity-80"
+          >
+            {loading ? 'Loading...' : 'Sing In'}
+          </button>
+          <div className="relative w-full flex items-center gap-2 my-5 opacity-50 uppercase text-emerald-500 font-bold">
+            <hr className="w-1/2 border-emerald-500" />
+            <p>or</p>
+            <hr className="w-1/2 border-emerald-500" />
+          </div>
+          <OAuth />
+        </form>
+        <div className="flex gap-2 mt-5">
+          <p>Don't have an account?</p>
+          <Link to={'/sign-up'}>
+            <span className="text-emerald-500 underline">Sign up</span>
+          </Link>
         </div>
-        <OAuth />
-      </form>
-      <div className="flex gap-2 mt-5">
-        <p>Don't have an account?</p>
-        <Link to={'/sign-up'}>
-          <span className="text-emerald-500 underline">Sign up</span>
-        </Link>
+        {error && <p className="text-red-500 mt-5">{error}</p>}
       </div>
-      {error && <p className="text-red-500 mt-5">{error}</p>}
-    </div>
+    </AnimationWrapper>
   );
 };
 

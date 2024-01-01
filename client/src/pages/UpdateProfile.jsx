@@ -20,7 +20,7 @@ import {
 } from '../redux/user/userSlice.js';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { FaPen, FaTrash } from 'react-icons/fa';
+
 import SideBar from '../components/SideBar.jsx';
 
 const UpdateProfile = () => {
@@ -31,8 +31,6 @@ const UpdateProfile = () => {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  const [showListingsError, setShowListingsError] = useState(false);
-  const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
   //firebase storage
   //allow read;
@@ -126,37 +124,6 @@ const UpdateProfile = () => {
     }
   };
 
-  const handleShowListings = async () => {
-    try {
-      setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
-      const data = await res.json();
-      if (data.success === false) {
-        setShowListingsError(true);
-        return;
-      }
-      setUserListings(data);
-    } catch (error) {
-      setShowListingsError(true);
-    }
-  };
-  const handleDeleteListing = async (listingId) => {
-    try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
-        method: 'DELETE',
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        console.log(data.message);
-        return;
-      }
-      setUserListings((prev) =>
-        prev.filter((listing) => listing._id !== listingId)
-      );
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
   return (
     <div className="flex">
       <SideBar />
@@ -259,60 +226,6 @@ const UpdateProfile = () => {
         <p className="text-green-700 t-5">
           {updateSuccess ? 'User is updated successfully!' : ''}
         </p>
-        <button
-          onClick={handleShowListings}
-          className="text-green-700 w-full uppercase"
-        >
-          Show your own Properties
-        </button>
-        <p className="text-red-700 t-5">
-          {showListingsError ? 'Error Show Properties' : ''}
-        </p>
-
-        {userListings && userListings.length > 0 && (
-          <div className="flex flex-col gap-4">
-            <h1 className="text-center mt-7 text-2xl font-semibold">
-              Your Properties
-            </h1>
-            {userListings.map((listing) => (
-              <div
-                key={listing._id}
-                className="border rounded-lg p-3 flex  justify-between items-center gap-4"
-              >
-                <Link to={`/listing/${listing._id}`}>
-                  <img
-                    src={listing.imageUrls[0]}
-                    alt="listing cover"
-                    className="h-20 w-20 object-cover rounded-lg"
-                  />
-                </Link>
-                <Link
-                  className="text-emerald-900 font-semibold  hover:underline truncate flex-1"
-                  to={`/listing/${listing._id}`}
-                >
-                  <p>{listing.name}</p>
-                </Link>
-
-                <div className="flex flex-col item-center">
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteListing(listing._id)}
-                    className="p-3 text-red-700 rounded-lg uppercase flex items-center hover:opacity-75 "
-                  >
-                    <FaTrash className="mr-1 text-xs" />
-                    <span>Delete</span>
-                  </button>
-                  <Link to={`/update-listing/${listing._id}`}>
-                    <button className="p-3 text-green-700 rounded-lg uppercase flex items-center hover:opacity-75">
-                      <FaPen className="mr-1 text-xs" />
-                      Edit
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );

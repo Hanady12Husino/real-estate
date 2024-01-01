@@ -1,5 +1,6 @@
 import emailjs from '@emailjs/browser';
 import { useRef, useState } from 'react';
+import AnimationWrapper from '../components/AnimationWrapper';
 
 const Contact = () => {
   const formRef = useRef();
@@ -60,62 +61,64 @@ const Contact = () => {
       );
   };
   return (
-    <div className="px-3 py-20 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7 text-emerald-900">
-        {' '}
-        <p className="text-sm uppercase font-normal text-center text-emerald-500">
-          Get in touch
-        </p>
-        Contact us
-      </h1>
-      <form
-        ref={formRef}
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-4"
-      >
-        <label className="flex flex-col">
-          <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Enter your name..."
-            className="border p-3 rounded-lg"
-            required
-          />
-        </label>
-        <label className="flex flex-col">
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Enter your email..."
-            className="border p-3 rounded-lg"
-            required
-          />
-        </label>
-        <label className="flex flex-col">
-          <textarea
-            rows={7}
-            name="message"
-            value={form.message}
-            onChange={handleChange}
-            placeholder="Your message..."
-            className="border p-3 rounded-lg"
-            required
-          />
-        </label>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-emerald-900 uppercase p-3 rounded-lg text-emerald-100 hover:opacity-95 disabled:opacity-80"
+    <AnimationWrapper>
+      <div className="px-3 py-20 max-w-lg mx-auto min-h-screen">
+        <h1 className="text-3xl text-center font-semibold my-7 text-emerald-900">
+          {' '}
+          <p className="text-sm uppercase font-normal text-center text-emerald-500">
+            Get in touch
+          </p>
+          Contact us
+        </h1>
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-4"
         >
-          {loading ? 'Sending...' : 'Send'}
-        </button>
-      </form>
-    </div>
+          <label className="flex flex-col">
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="Enter your name..."
+              className="border p-3 rounded-lg"
+              required
+            />
+          </label>
+          <label className="flex flex-col">
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Enter your email..."
+              className="border p-3 rounded-lg"
+              required
+            />
+          </label>
+          <label className="flex flex-col">
+            <textarea
+              rows={7}
+              name="message"
+              value={form.message}
+              onChange={handleChange}
+              placeholder="Your message..."
+              className="border p-3 rounded-lg"
+              required
+            />
+          </label>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-emerald-900 uppercase p-3 rounded-lg text-emerald-100 hover:opacity-95 disabled:opacity-80"
+          >
+            {loading ? 'Sending...' : 'Send'}
+          </button>
+        </form>
+      </div>
+    </AnimationWrapper>
   );
 };
 

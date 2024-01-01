@@ -60,7 +60,7 @@ const SignUp = () => {
   };
   return (
     <AnimationWrapper>
-      <div className="p-3 max-w-lg mx-auto">
+      <div className="p-3 max-w-lg mx-auto min-h-screen">
         <h1 className="text-3xl text-center font-semibold my-7 text-emerald-900">
           {' '}
           Sign Up

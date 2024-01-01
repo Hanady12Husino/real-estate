@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ListingItem from '../components/ListingItem';
+import AnimationWrapper from '../components/AnimationWrapper';
 
 const Search = () => {
   const navigate = useNavigate();
@@ -125,167 +126,171 @@ const Search = () => {
     setListings([...listings, ...data]);
   };
   return (
-    <div className="flex flex-col md:flex-row">
-      <div className="p-7 border-b-2 sm:border-r-2 md:min-h-screen">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-8"
-        >
-          <div className="flex items-center gap-2">
-            <label className="whitespace-nowrap font-semibold text-emerald-900">
-              Search Term:
-            </label>
-            <input
-              type="text"
-              id="searchTerm"
-              placeholder="Search..."
-              className="border border-emerald-200 rounded-lg p-3 w-full placeholder:text-emerald-200"
-              value={sidebarData.searchTerm}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex gap-2 items-center flex-wrap">
-            <label className="font-semibold text-emerald-900">Type:</label>
-            <div className="flex gap-2">
+    <AnimationWrapper>
+      <div className="flex flex-col md:flex-row">
+        <div className="p-7 border-b-2 sm:border-r-2 md:min-h-screen">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-8"
+          >
+            <div className="flex items-center gap-2">
+              <label className="whitespace-nowrap font-semibold text-emerald-900">
+                Search Term:
+              </label>
               <input
-                type="checkbox"
-                id="all"
-                className="w-5"
+                type="text"
+                id="searchTerm"
+                placeholder="Search..."
+                className="border border-emerald-200 rounded-lg p-3 w-full placeholder:text-emerald-200"
+                value={sidebarData.searchTerm}
                 onChange={handleChange}
-                checked={sidebarData.type === 'all'}
               />
-              <span className="text-emerald-500">Rent & Sale</span>
             </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="rent"
-                className="w-5"
+            <div className="flex gap-2 items-center flex-wrap">
+              <label className="font-semibold text-emerald-900">Type:</label>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="all"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={sidebarData.type === 'all'}
+                />
+                <span className="text-emerald-500">Rent & Sale</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="rent"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={sidebarData.type === 'rent'}
+                />
+                <span className="text-emerald-500">Rent</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="sale"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={sidebarData.type === 'sale'}
+                />
+                <span className="text-emerald-500">Sale</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="offer"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={sidebarData.offer}
+                />
+                <span className="text-emerald-500">Offer</span>
+              </div>
+            </div>
+            <div className="flex gap-2 items-center flex-wrap">
+              <label className="font-semibold text-emerald-900">
+                Amenities:
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="parking"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={sidebarData.parking}
+                />
+                <span className="text-emerald-500">Parking</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="furnished"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={sidebarData.furnished}
+                />
+                <span className="text-emerald-500">Furnished</span>
+              </div>
+            </div>
+            <div className="flex gap-2 items-center">
+              <label className="font-semibold text-emerald-900">Sort:</label>
+              <select
+                id="sort_order"
+                className="border rounded-lg p-3 text-emerald-500"
                 onChange={handleChange}
-                checked={sidebarData.type === 'rent'}
-              />
-              <span className="text-emerald-500">Rent</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="sale"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebarData.type === 'sale'}
-              />
-              <span className="text-emerald-500">Sale</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="offer"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebarData.offer}
-              />
-              <span className="text-emerald-500">Offer</span>
-            </div>
-          </div>
-          <div className="flex gap-2 items-center flex-wrap">
-            <label className="font-semibold text-emerald-900">Amenities:</label>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="parking"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebarData.parking}
-              />
-              <span className="text-emerald-500">Parking</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="furnished"
-                className="w-5"
-                onChange={handleChange}
-                checked={sidebarData.furnished}
-              />
-              <span className="text-emerald-500">Furnished</span>
-            </div>
-          </div>
-          <div className="flex gap-2 items-center">
-            <label className="font-semibold text-emerald-900">Sort:</label>
-            <select
-              id="sort_order"
-              className="border rounded-lg p-3 text-emerald-500"
-              onChange={handleChange}
-              defaultValue={'created_at_desc'}
-            >
-              <option
-                value={'regularPrice_desc'}
-                className="text-emerald-500"
+                defaultValue={'created_at_desc'}
               >
-                Price high to low
-              </option>
-              <option
-                value={'regularPrice_asc'}
-                className="text-emerald-500"
-              >
-                Price low to high
-              </option>
-              <option
-                value={'createdAt_desc'}
-                className="text-emerald-500"
-              >
-                Latest
-              </option>
-              <option
-                value={'createdAt_asc'}
-                className="text-emerald-500"
-              >
-                Oldest
-              </option>
-            </select>
-          </div>
-          <button className="bg-emerald-900 text-white uppercase p-3 rounded-lg hover:opacity-95">
-            Search
-          </button>
-        </form>
-      </div>
-      <div className="flex-1 p-3 sm:p-7">
-        <h1 className="text-emerald-900 font-semibold text-3xl boerder-b mt-2">
-          Property results:
-        </h1>
-        <div className="p-3 sm:p-7 flex flex-wrap gap-4">
-          {!loadingListings && listings.length === 0 && (
-            <p className="text-xl text-emerald-900">No listing found!</p>
-          )}
-          {loadingListings && (
-            <p className="text-xl text-emerald-900 text-center w-full">
-              Loading...
-            </p>
-          )}
-
-          {!loadingListings &&
-            listings &&
-            listings.map((listing) => (
-              <ListingItem
-                key={listing._id}
-                listing={listing}
-              />
-            ))}
-        </div>
-        <div className="text-center">
-          {showMore && (
-            <button
-              onClick={() => {
-                onShowMoreClick();
-              }}
-              className="bg-emerald-900 text-white rounded-lg p-3 mt-4 hover:opacity-95 text-center"
-            >
-              Show more
+                <option
+                  value={'regularPrice_desc'}
+                  className="text-emerald-500"
+                >
+                  Price high to low
+                </option>
+                <option
+                  value={'regularPrice_asc'}
+                  className="text-emerald-500"
+                >
+                  Price low to high
+                </option>
+                <option
+                  value={'createdAt_desc'}
+                  className="text-emerald-500"
+                >
+                  Latest
+                </option>
+                <option
+                  value={'createdAt_asc'}
+                  className="text-emerald-500"
+                >
+                  Oldest
+                </option>
+              </select>
+            </div>
+            <button className="bg-emerald-900 text-white uppercase p-3 rounded-lg hover:opacity-95">
+              Search
             </button>
-          )}
+          </form>
+        </div>
+        <div className="flex-1 p-3 sm:p-7">
+          <h1 className="text-emerald-900 font-semibold text-3xl boerder-b mt-2">
+            Property results:
+          </h1>
+          <div className="p-3 sm:p-7 flex flex-wrap gap-4">
+            {!loadingListings && listings.length === 0 && (
+              <p className="text-xl text-emerald-900">No listing found!</p>
+            )}
+            {loadingListings && (
+              <p className="text-xl text-emerald-900 text-center w-full">
+                Loading...
+              </p>
+            )}
+
+            {!loadingListings &&
+              listings &&
+              listings.map((listing) => (
+                <ListingItem
+                  key={listing._id}
+                  listing={listing}
+                />
+              ))}
+          </div>
+          <div className="text-center">
+            {showMore && (
+              <button
+                onClick={() => {
+                  onShowMoreClick();
+                }}
+                className="bg-emerald-900 text-white rounded-lg p-3 mt-4 hover:opacity-95 text-center"
+              >
+                Show more
+              </button>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </AnimationWrapper>
   );
 };
 
