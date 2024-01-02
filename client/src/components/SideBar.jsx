@@ -33,7 +33,7 @@ const SideBar = () => {
     }
   };
   return (
-    <div className="py-7 px-3 lg:px-7 border-r-2 min-h-screen w-14 lg:w-[170px]">
+    <div className="py-7 px-3 lg:px-7 border-r-2 min-h-screen w-16 lg:w-[200px]">
       <div className="fixed flex flex-col gap-4">
         {currentUser?.isAdmin === true && (
           <Link to="/dashboard">

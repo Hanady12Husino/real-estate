@@ -104,7 +104,7 @@ const Header = () => {
           <ul className="md:flex md:items-center gap-2 md:gap-4 text-emerald-500 md:mr-5">
             <Link
               to="/"
-              className="hidden md:inline"
+              className="hidden lg:inline"
             >
               <li className="hover:text-emerald-900  duration-500 uppercase">
                 Home
@@ -112,7 +112,7 @@ const Header = () => {
             </Link>
             <Link
               to="/about"
-              className="hidden md:inline"
+              className="hidden lg:inline"
             >
               <li className="hover:text-emerald-900  duration-500 uppercase">
                 About
@@ -120,7 +120,7 @@ const Header = () => {
             </Link>
             <Link
               to="/contact-us"
-              className="hidden md:inline"
+              className="hidden lg:inline"
             >
               <li className="hover:text-emerald-900  duration-500 uppercase">
                 Contact
@@ -140,13 +140,13 @@ const Header = () => {
               )}
             </Link>
             <Link to={'/create-listing'}>
-              <button className="bg-emerald-500 text-emerald-50 duration-500 px-6 py-2 hover:bg-emerald-900 hover:text-emerald-100 rounded-full hidden md:inline ">
+              <button className="bg-emerald-500 text-emerald-50 duration-500 px-6 py-2 hover:bg-emerald-900 hover:text-emerald-100 rounded-full hidden lg:inline ">
                 Add Property
               </button>
             </Link>
           </ul>
         </div>
-        <div className="mr-2 flex md:hidden">
+        <div className="mr-2 flex lg:hidden">
           <button
             className="inline-flex items-center justify-center p-2 rounded-md text-emerald-500 hover:text-emerald-900"
             type="button"
@@ -157,7 +157,7 @@ const Header = () => {
         </div>
       </div>
       {toggle ? (
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <div className="ox-2 p-6 space-y-1 sm:px-3">
             <ul className="flex flex-col items-start gap-4 text-emerald-500 ">
               <Link to="/">

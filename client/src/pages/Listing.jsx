@@ -15,6 +15,7 @@ import {
 } from 'react-icons/fa';
 import Contact from '../components/Contact';
 import AnimationWrapper from '../components/AnimationWrapper';
+
 const Listing = () => {
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
@@ -22,7 +23,6 @@ const Listing = () => {
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
   const [contact, setContact] = useState(false);
-
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
@@ -135,14 +135,16 @@ const Listing = () => {
                 </li>
               </ul>
               <div className="flex gap-4">
-                {!contact && (
-                  <button
-                    onClick={() => setContact(true)}
-                    className="bg-emerald-900 w-1/2 flex-1 uppercase p-3 rounded-lg text-emerald-100 hover:opacity-95 "
-                  >
-                    Email Agent
-                  </button>
-                )}
+                {!contact &&
+                  ((currentUser && currentUser._id !== listing.userRef) ||
+                    !currentUser) && (
+                    <button
+                      onClick={() => setContact(true)}
+                      className="bg-emerald-900 w-1/2 flex-1 uppercase p-3 rounded-lg text-emerald-100 hover:opacity-95 "
+                    >
+                      Email Agent
+                    </button>
+                  )}
                 {currentUser &&
                   listing.userRef === currentUser._id &&
                   !contact && (

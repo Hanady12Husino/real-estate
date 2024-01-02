@@ -75,20 +75,30 @@ const Dashboard = () => {
           Welcome Back {currentUser.fullname}
         </h2>
         <div className="flex mt-[20px] gap-4 flex-col lg:flex-row">
-          <div className="flex flex-col rounded-lg bg-emerald-900 py-[50px]  items-center gap-3 w-full lg:w-1/2">
-            <FaHome className="text-emerald-100 text-3xl" />
-            <h3 className="text-sm text-emerald-50 w-200">All Properties</h3>
-            <h3 className="text-2xl text-emerald-500 font-bold ">
-              {listings.length}
-            </h3>
-          </div>
-          <div className="flex flex-col rounded-lg bg-emerald-900 py-[50px]  items-center gap-3 w-full lg:w-1/2">
-            <FaUsers className="text-emerald-100 text-3xl" />
-            <h3 className="text-sm text-emerald-50 w-200">All Agents</h3>
-            <h3 className="text-2xl text-emerald-500 font-bold ">
-              {users.length}
-            </h3>
-          </div>
+          <Link
+            to={'/properties'}
+            className="w-full lg:w-1/2"
+          >
+            <div className="flex flex-col rounded-lg bg-emerald-900 py-[50px]  items-center gap-3 ">
+              <FaHome className="text-emerald-100 text-3xl" />
+              <h3 className="text-sm text-emerald-50 w-200">All Properties</h3>
+              <h3 className="text-2xl text-emerald-500 font-bold ">
+                {listings.length}
+              </h3>
+            </div>
+          </Link>
+          <Link
+            to={'/users'}
+            className="w-full lg:w-1/2"
+          >
+            <div className="flex flex-col rounded-lg bg-emerald-900 py-[50px]  items-center gap-3 ">
+              <FaUsers className="text-emerald-100 text-3xl" />
+              <h3 className="text-sm text-emerald-50 w-200">All Agents</h3>
+              <h3 className="text-2xl text-emerald-500 font-bold ">
+                {users.length}
+              </h3>
+            </div>
+          </Link>
         </div>
         <div className="mt-[20px] flex flex-col lg:flex-row gap-4">
           <div className="flex flex-col rounded-lg bg-gradient-to-r from-emerald-200 to-emerald-50  items-center gap-4 w-full lg:w-1/3 py-[50px]">
