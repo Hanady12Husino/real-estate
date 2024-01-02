@@ -136,8 +136,8 @@ const Listing = () => {
               </ul>
               <div className="flex gap-4">
                 {!contact &&
-                  ((currentUser && currentUser._id !== listing.userRef) ||
-                    !currentUser) && (
+                  currentUser &&
+                  currentUser._id !== listing.userRef && (
                     <button
                       onClick={() => setContact(true)}
                       className="bg-emerald-900 w-1/2 flex-1 uppercase p-3 rounded-lg text-emerald-100 hover:opacity-95 "
@@ -145,6 +145,16 @@ const Listing = () => {
                       Email Agent
                     </button>
                   )}
+                {!currentUser && (
+                  <Link
+                    to={'/sign-in'}
+                    className="bg-emerald-900 uppercase flex-1 p-3 w-1/2 rounded-lg text-emerald-100 hover:opacity-95 text-center"
+                  >
+                    <button className="bg-emerald-900  uppercase text-center rounded-lg text-emerald-100 hover:opacity-95 ">
+                      Sign In To Email Agent
+                    </button>
+                  </Link>
+                )}
                 {currentUser &&
                   listing.userRef === currentUser._id &&
                   !contact && (

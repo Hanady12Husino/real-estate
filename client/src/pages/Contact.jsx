@@ -36,7 +36,7 @@ const Contact = () => {
           from_name: form.name,
           to_name: 'Hanady Husino',
           from_email: form.email,
-          to_email: 'info@hanadyhusino.com',
+          to_email: 'hanady12husino@gmail.com',
           message: form.message,
         },
         import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
