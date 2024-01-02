@@ -60,7 +60,7 @@ const Home = () => {
               <h1 className="text-emerald-500 font-bold text-3xl lg:text-6xl leading-relaxed	">
                 Find your next{' '}
                 <span className="gradient-text">
-                  perfect <br /> property with ease
+                  ideal <br /> property with ease
                 </span>
               </h1>
             </div>
