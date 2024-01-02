@@ -23,27 +23,27 @@ const UserProfile = () => {
             className="h-20 w-20 object-cover rounded-full"
           />
           <div className="flex flex-col gap-6">
-            <div className="flex gap-4">
+            <div className="flex gap-2 sm:gap-4 items-center">
               <label className="whitespace-nowrap uppercase font-semibold text-emerald-900">
                 Full Name:
               </label>
-              <label className="whitespace-nowrap uppercase  text-emerald-900">
+              <label className="whitespace-nowrap uppercase  text-emerald-900 text-[12px] sm:text-[14px]">
                 {currentUser.fullname}
               </label>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-2 sm:gap-4 items-center">
               <label className="whitespace-nowrap uppercase font-semibold text-emerald-900">
                 User Name:
               </label>
-              <label className="whitespace-nowrap uppercase  text-emerald-900">
+              <label className="whitespace-nowrap uppercase  text-emerald-900 text-[12px] sm:text-[14px]">
                 {currentUser.username}
               </label>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-2 sm:gap-4 items-center">
               <label className="whitespace-nowrap uppercase font-semibold text-emerald-900">
                 Email:
               </label>
-              <label className="whitespace-nowrap uppercase  text-emerald-900">
+              <label className="whitespace-nowrap uppercase  text-emerald-900 text-[12px] sm:text-[14px]">
                 {currentUser.email}
               </label>
             </div>

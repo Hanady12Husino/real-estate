@@ -65,7 +65,7 @@ const AllProperties = () => {
                 {properties.map((listing) => (
                   <tr
                     key={listing._id}
-                    className="border-b sm:table-row"
+                    className="border-b flex flex-col mb-4 sm:table-row"
                   >
                     <td className="p-4 text-sm  text-emerald-500">
                       {listing._id}
