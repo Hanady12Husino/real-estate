@@ -83,7 +83,7 @@ const Home = () => {
         {offerListings && offerListings.length > 0 && (
           <div className="mt-4 sm:mt-10">
             <div className="my-3 mb-6  sm:text-center flex flex-col sm:items-center">
-              <h2 className="text-3xl sm:text-4xl font-semibold  gradient-text">
+              <h2 className="text-2xl sm:text-4xl font-semibold  gradient-text">
                 Recent offers
               </h2>
 
@@ -107,7 +107,7 @@ const Home = () => {
         {rentListings && rentListings.length > 0 && (
           <div className="mt-4 sm:mt-10">
             <div className=" my-3 mb-6 sm:text-center flex flex-col sm:items-center">
-              <h2 className="text-3xl sm:text-4xl font-semibold gradient-text">
+              <h2 className="text-2xl sm:text-4xl font-semibold gradient-text">
                 Top Recent places for rent
               </h2>
               <Link
